@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/gorilla/websocket"
 	"net/http"
+	"os"
 )
 
 var Connections []*websocket.Conn
@@ -19,7 +20,7 @@ func main() {
 
 	http.HandleFunc("/socket", ServeWs)
 
-	err := http.ListenAndServe(":8080", nil)
+	err := http.ListenAndServe(":" + os.Getenv("PORT"), nil)
 	if err != nil {
 		panic(err)
 	}
